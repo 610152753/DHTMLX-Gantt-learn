@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<head>
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+	<title>Basic initialization</title>
+	<script src="../../codebase/dhtmlxgantt.js?v=6.0.7"></script>
+	<link rel="stylesheet" href="../../codebase/dhtmlxgantt.css?v=6.0.7">
+
+	<script src="../common/testdata.js?v=6.0.7"></script>
+	<style>
+		html, body {
+			height: 100%;
+			padding: 0px;
+			margin: 0px;
+			overflow: hidden;
+		}
+	</style>
+</head>
+<body>
+<div id="gantt_here" style='width:100%; height:100%;'></div> <!--展示甘特图的元素-->
+<script>
+	var tasks = {
+		data: [
+			{
+				id: 1, text: "Project #2", start_date: "01-04-2018", duration: 6, order: 10,
+				progress: 0.4, open: true //open 为true为展开 false为收起
+			},
+			{
+				id: 2, text: "Task #2", start_date: "02-04-2018", duration: 2, order: 10,
+				progress: 0.6, parent: 1
+			},
+			{
+				id: 3, text: "Task #3", start_date: "04-04-2018", duration: 2, order: 20,
+				progress: 0.6, parent: 1
+			},
+			{
+				id: 4, text: "Task #4", start_date: "04-04-2018", duration: 2, order: 30,
+				progress: 0.4, parent: 1
+			},
+			{
+				id: 5, text: "Task #5", start_date: "02-04-2018", duration: 1, order: 40,
+				progress: 0.8, parent: 1
+			}
+			//{
+			//  id: 5 任务唯一ID, text: "Task #5" 任务名称, start_date: "02-04-2018"  任务的开始时间, duration: 1  任务的持续时间, order: 40,
+			//  progress: 0.8  任务的完成百分比, parent: 1 父ID
+			//}
+			//
+
+		],
+		links: [
+			{id: 1, source: 1, target: 2, type: "1"},//id: 1  连接的唯一id,  source: 连接的起点 1, target: 连接的终点 2, type: "1" 开始-开始 任务连线类型
+			{id: 2, source: 2, target: 3, type: "0"},//id: 2, source: 1, target: 2, type: "0" 结束-开始 任务连线类型
+			{id: 3, source: 3, target: 4, type: "2"},//id: 3, source: 1, target: 2, type: "2" 结束-结束 任务连线类型
+			{id: 4, source: 4, target: 5, type: "3"} //id: 4, source: 1, target: 2, type: "3" 开始-结束 任务连线类型
+		]
+	};
+
+	gantt.init("gantt_here");//初始化甘特图
+
+
+	gantt.parse(tasks);//加载任务数据
+
+</script>
+</body>
